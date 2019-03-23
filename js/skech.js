@@ -34,10 +34,10 @@ function setup(){
     // create and initialize the instances of the DrawCircle object
   // populate the circles array with all the instances.
   for (var i = 0; i < 5; i++) {
-    var x = Math.random() * window.innerWidth / 2 + oneFourthWidth + 10;
+    var x = (Math.random() * window.innerWidth / 2 - window.innerWidth / 10 / 3) + oneFourthWidth;
     var y = random(height/3);
     var garbageImage = garbageList[Math.floor(Math.random() * 3)];
-    var w = window.innerWidth / 10 / 2;
+    var w = window.innerWidth / 10 / 3;
     var s = 2;
   	circles[i] = new DrawCircle(x, y, garbageImage, w, s);
   }
