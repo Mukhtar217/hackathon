@@ -8,7 +8,12 @@ var garbageY = window.innerHeight - window.innerWidth / 10;
 
 let garbageCanImg;
 var garbageList = [];
-var points = 0;
+var points = 15;
+
+let rx = 5;
+let ry = 100;
+let rw = 330;
+let rh = 100;
 
 function preload(){
     garbageCanImg = loadImage("./js/garbage.png");
@@ -28,13 +33,13 @@ function setup(){
     
     // create and initialize the instances of the DrawCircle object
   // populate the circles array with all the instances.
-  for (var i = 0; i < 1; i++) {
+  for (var i = 0; i < 5; i++) {
     var x = Math.random() * window.innerWidth / 2 + oneFourthWidth;
     var y = random(height/3);
-    var d = Math.random() * window.innerWidth / 10 / 2 + window.innerWidth / 10 / 2;
-    var c = color(random(255), random(255), 255);
+    var garbageImage = garbageList[1];
+    var w = 10;
     var s = 2;
-  	circles[i] = new DrawCircle(x, y, d, c, s);
+  	circles[i] = new DrawCircle(x, y, garbageImage, w, s);
   }
     
 }
@@ -51,15 +56,19 @@ function draw(){
     if(points == 10){
         window.href = "EndPage.html";
     }
-
+    
+    fill('green');
+    rect(rx,ry,rw,rh)
+    
+   
 }
 
-function DrawCircle( x, y, d, c, s ) {
+function DrawCircle( x, y, garbageImage, w, s ) {
   // declare the properties
   this.xPos = x;
   this.yPos = y;
-  this.diameter = d;
-  this.color = c;
+  this.garbageImage = garbageImage;
+  this.width = w;
   this.speed = s;
 }
 
@@ -67,8 +76,9 @@ DrawCircle.prototype = {
 	constructor: DrawCircle,
   // *** Method: display the circle on the canvas *** 
   display: function() {
-    fill(this.color);
-    ellipse(this.xPos,this.yPos, this.diameter, this.diameter);
+    // fill(this.color);
+    // ellipse(this.xPos,this.yPos, this.diameter, this.diameter);
+    image(this.garbageImage, this.xPos, this.yPos, this.width, this.width);
     
     // uncomment the lines below and start building your own shape here!
     // rect(this.xPos,this.yPos, this.diameter/2, this.diameter);
@@ -81,24 +91,32 @@ DrawCircle.prototype = {
   move: function() {
 		this.yPos += this.speed;
     // the circle is outside the canvas, retset its position at the top
-    if (this.yPos - this.diameter/2 > height) {
+    if (this.yPos - this.width > height) {
     	console.log(this.xPos, garbageX);
-    	if(this.xPos - this.diameter / 2 > garbageX && this.xPos + this.diameter / 2 < garbageX + window.innerWidth /10){
-    	   // alert('Point!');
-    	    points++;
-    	    
+    	console.log(points);
+    	if(garbageX < this.xPos && garbageX + window.innerWidth / 10 > this.xPos + this.width){
+    	   if(points < 20){
+    	      points++;
+    	      
+    	   } else if (points ==30){
+    	       window.location.href="winPage.html";
+    	    }
     	} else {
-    	    points--;
+    	    if(points > 0){
+    	        points--;
+    	    } else{
+    	        window.location.href="EndPage.html"
+    	    }
     	}
-    	this.yPos = -this.diameter/2;
+    	this.yPos = 0;
     	this.xPos = Math.random() * window.innerWidth / 2 + oneFourthWidth;
     }
+   
+    document.getElementById('scoreP').innerHTML = points;
+
 	}
 	
-	// if (score>=100){
-	 //   window.location.href="winPage.html";
 
-    //} 
 	
 	
 }
@@ -119,24 +137,6 @@ function garbageCan(){
     this.update();
     
 }
-var garbageDisplay =[];
-function createGarbage(){
-    let x = (Math.random() * window.innerWidth / 2 - window.innerWidth / 10) + oneFourthWidth;
-    let y = 0;
-    let garImg = garbageList[Math.floor(Math.random() * garbageList.length)];
-    let dy = Math.floor(Math.random()) * window.innerHeight / 7 + 3;
-    
-    this.draw = function(){
-        image(garImg, x, y, 10, 10);
-    };
-    
-    this.update = function(){
-        y += dy;
-        this.draw();
-    };
-    
-    
-}
 
 function statsBox(){
     
@@ -150,10 +150,10 @@ function statsBox(){
     textSize(32);
     
     
-    health
-    fill('green')
-    rect(0, window.innerHeight-10, 50, 100)
-    
+    // health
+
+  
+
 };
 
 // function countdown() {
