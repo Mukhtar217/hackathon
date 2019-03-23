@@ -9,15 +9,15 @@ var garbageY = window.innerHeight - window.innerWidth / 10;
 let garbageCanImg;
 var garbageList = [];
 var points = 15;
-
-let rx = 5;
-let ry = 100;
-let rw = 330;
-let rh = 100;
+    var width = window.innerWidth - 2;
+    let rx = 5;
+    let ry = 100;
+    let rw = width / 4;
+    let rh = 100;
 
 function preload(){
     garbageCanImg = loadImage("./js/garbage.png");
-    let garbage = ["./js/straw.png", "./js/bottle.png"];
+    let garbage = ["./js/straw.png", "./js/bottle.png", "./js/bag.png"];
     for (var i = 0; i < garbage.length; i++){
         let garbageImg = loadImage(garbage[i])
         garbageList.push(garbageImg);
@@ -34,10 +34,10 @@ function setup(){
     // create and initialize the instances of the DrawCircle object
   // populate the circles array with all the instances.
   for (var i = 0; i < 5; i++) {
-    var x = Math.random() * window.innerWidth / 2 + oneFourthWidth;
+    var x = Math.random() * window.innerWidth / 2 + oneFourthWidth + 10;
     var y = random(height/3);
-    var garbageImage = garbageList[1];
-    var w = 10;
+    var garbageImage = garbageList[Math.floor(Math.random() * 3)];
+    var w = window.innerWidth / 10 / 2;
     var s = 2;
   	circles[i] = new DrawCircle(x, y, garbageImage, w, s);
   }
@@ -57,8 +57,14 @@ function draw(){
         window.href = "EndPage.html";
     }
     
+    
+
     fill('green');
     rect(rx,ry,rw,rh)
+    
+    textSize(32);
+    fill(50)
+    text('Health',5,70,100,100)
     
    
 }
@@ -91,19 +97,20 @@ DrawCircle.prototype = {
   move: function() {
 		this.yPos += this.speed;
     // the circle is outside the canvas, retset its position at the top
-    if (this.yPos - this.width > height) {
+    if (this.yPos > window.innerHeight - window.innerWidth / 10) {
     	console.log(this.xPos, garbageX);
     	console.log(points);
     	if(garbageX < this.xPos && garbageX + window.innerWidth / 10 > this.xPos + this.width){
     	   if(points < 20){
     	      points++;
     	      
-    	   } else if (points ==30){
-    	       window.location.href="winPage.html";
+    	   } else if (points =18){
+    	       window.location.href="WinPage.html";
     	    }
     	} else {
     	    if(points > 0){
     	        points--;
+    	        rw = rw - 10;
     	    } else{
     	        window.location.href="EndPage.html"
     	    }

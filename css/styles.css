@@ -103,6 +103,8 @@ canvas{
     color:black;
 }
 .PA{
+    display:flex;
+    justify-content:center;
     padding-left: 15px;
     padding-top:15px;
     height:75px;
@@ -137,7 +139,14 @@ canvas{
     position:absolute;
     left:80%;
     top:10px;
-    font-size:16px;
+    font-size:30px;
+    color:black;
+    
+}
+#score{
+    left:80%;
+    top:10px;
+    font-size:30px;
     color:black;
     
 }
@@ -149,4 +158,6 @@ canvas{
 .score{
     margin:0px;
     padding:0px;
+    position:absolute;
+    z-index:1;
 }
