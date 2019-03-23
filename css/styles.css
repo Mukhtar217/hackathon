@@ -1,35 +1,103 @@
-html{
+body{
+        font-family: 'Quicksand', sans-serif;
+
+}
+canvas{
+    position: absolute;
+}
+
+*{
     margin:0;
 }
-body{
-    margin:0;
+#home{
+    height:100vh;
+    background-size: cover;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/99/Bute_Park%2C_Cardiff.jpg) no-repeat center center fixed;
 }
 .title{
     text-align:center;
 }
-header {
-  background-color: #666;
+.head {
+  background-color:brown;
   padding: 30px;
   text-align: center;
   font-size: 35px;
   color: white;
+  font-family: 'Oswald', sans-serif;
+  height:20%;
 }
-nav{
-  
-  width: 30%;
-  height: 300px; 
-  background: #ccc;
-  padding: 20px;
-}
-.backstroy{
-   float: right;
-  width: 50%;
-  height: 300px; 
-  background: #ccc;
-  padding: 20px; 
-}
+
+
 
 #mid{
     display:flex;
-    justify-content:space-between;
+    justify-content:space-around;
+    border-bottom:solid 3px black;
+    padding:10px;
+    height: 50%;
+    align-items:center;
+    background-color: rgb(25, 183, 91,0.9);
+    font-family: 'Quicksand', sans-serif;
+     
+}
+
+#bottom{
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+    height:30%;
+    font-size:20px;
+}
+.box{
+    border:solid 3px black;
+    height:350px;
+    width:500px;
+    display:flex;
+    flex-direction:column;
+    border-radius:30px;
+    padding:20px;
+    background-color: rgb(160, 240, 255);
+}
+
+/*end page*/
+.endResult{
+    width:50%;
+        border-right:solid 1px black;
+                padding:15px;
+
+
+}
+.endLink{
+    width:50%;
+        border-left:solid 1px black;
+        padding:15px;
+    font-size: 30px;
+}
+.Loadout{
+    display:flex;
+    color:black;
+            -webkit-text-stroke: px black;
+
+}
+.endTitle{
+    display:flex;
+    justify-content:center;
+    background-color: blue;
+    color:black;
+    border:solid 1px black;
+}
+.button{
+    display:flex;
+    justify-content:center;
+}
+.endScoreA{
+    color:black;
+}
+#ep1{
+    background-size: cover;
+    background-image:url("https://cleanmalaysia.com/wp-content/uploads/2016/07/ST-Garbage-in-garbage-out-3570x1680-790x372.jpg");
+}
+#ep2{
+    background-size: cover;
+    background-image:url("https://s3-production.bobvila.com/slides/26177/original/Salt-Lake-City-Dirty.jpeg?1524496735");
 }

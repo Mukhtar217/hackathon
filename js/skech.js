@@ -1,62 +1,57 @@
 // JavaScript File
-
+var oneFourthWidth = window.innerWidth / 4;
 
 let circlex = 100;
 let circley = 100;
+var garbageX = oneFourthWidth;
+var garbageY = window.innerHeight - window.innerWidth / 10;
 
-let img;
+let garbageCanImg;
+
+function preload(){
+    garbageCanImg = loadImage("./js/garbage.png");
+};
 
 function setup(){
-    let x = window.innerWidth;
-    let y = window.innerHeight;
+    let x = window.innerWidth-2;
+    let y = window.innerHeight-2;
     createCanvas(x, y);
-    img = loadImage('/hackahon/js/garbage.png');
+    
 }
 
 function draw(){
     background(0);
     statsBox();
     garbageCan();
-    image(img, 100, 100)
     
 
 
-    //strokeWeight(3)
-    //fill("green")
-    //triangle(600,735, 728,735, 664, 675)    
-        
-                        
-    // if(keyIsDown(LEFT_ARROW)){
-    //     x1 -= 10;
-    //     x2 -= 10;
-    //     x3 -= 10;
-    // }
-    // if(keyIsDown(RIGHT_ARROW)){
-    //     x1 += 10;
-    //     x2 += 10;
-    //     x3 += 10;
-        
-    // }
-    // if(x1 < 305){ 
-    //     x1 = 923;
-    //     x2 = 1023;
-    //     x3 = 973;
-    // }
-    // if(x2 > 1023){
-    //     x1 = 305;
-    //     x2 = 405;
-    //     x3 = 355;
-    // }
-    // strokeWeight(3)
-    // fill("green")
-    // triangle(x1,740, x2,740, x3, 680);
+
 }
 
 function garbageCan(){
+    this.update = function(){
+        if(keyIsDown(LEFT_ARROW)){
+            if(garbageX > oneFourthWidth){
+                garbageX -= window.innerWidth / 200;
+            }
+        } else if (keyIsDown(RIGHT_ARROW)){
+            if(garbageX < window.innerWidth - oneFourthWidth){
+                garbageX += window.innerWidth / 200;
+            }
+        }
+    }
+    image(garbageCanImg, garbageX, garbageY, window.innerWidth / 10, window.innerWidth / 10);
+    this.update();
+    
+}
+
+function createGarbage(){
+    
 }
 
 function statsBox(){
-    let oneFourthWidth = window.innerWidth / 4;
+    
     fill(100)
     rect(0, 0, oneFourthWidth, window.innerHeight)
     rect(oneFourthWidth * 3, 0, oneFourthWidth, window.innerHeight);
@@ -64,4 +59,4 @@ function statsBox(){
     fill(0)
     textSize(46)
     textSize(20)
-}
+};
