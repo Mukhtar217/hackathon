@@ -3,17 +3,19 @@ var oneFourthWidth = window.innerWidth / 4;
 
 let circlex = 100;
 let circley = 100;
-var garbageX = oneFourthWidth;
-var garbageY = window.innerHeight - window.innerWidth / 10;
+var player1X = oneFourthWidth;
+var player1Y = window.innerHeight - window.innerWidth / 10;
+var player2X = oneFourthWidth;
+var player2Y = window.innerHeight - window.innerWidth / 10;
 
 let garbageCanImg;
 var garbageList = [];
 var points = 15;
-    var width = window.innerWidth - 2;
-    let rx = 5;
-    let ry = 100;
-    let rw = width / 4;
-    let rh = 100;
+var width = window.innerWidth - 2;
+let rx = 5;
+let ry = 100;
+let rw = width / 4;
+let rh = 100;
 
 function preload(){
     garbageCanImg = loadImage("./js/garbage.png");
@@ -38,7 +40,7 @@ function setup(){
     var y = random(height/3);
     var garbageImage = garbageList[Math.floor(Math.random() * 3)];
     var w = window.innerWidth / 10 / 3;
-    var s = 2;
+    var s = 2.5;
   	circles[i] = new DrawCircle(x, y, garbageImage, w, s);
   }
     
@@ -48,7 +50,7 @@ function draw(){
     background(0);
     statsBox();
     garbageCan();
-    // createGarbage();
+
     for (var i = 0; i < circles.length; i++) {
   	    circles[i].move();
         circles[i].display();
@@ -57,16 +59,12 @@ function draw(){
         window.href = "EndPage.html";
     }
     
-    
-
     fill('green');
     rect(rx,ry,rw,rh)
     
     textSize(32);
     fill(50)
     text('Health',5,70,100,100)
-    
-   
 }
 
 function DrawCircle( x, y, garbageImage, w, s ) {
@@ -98,14 +96,15 @@ DrawCircle.prototype = {
 		this.yPos += this.speed;
     // the circle is outside the canvas, retset its position at the top
     if (this.yPos > window.innerHeight - window.innerWidth / 10) {
-    	console.log(this.xPos, garbageX);
+    	console.log(this.xPos, player1X);
     	console.log(points);
-    	if(garbageX < this.xPos && garbageX + window.innerWidth / 10 > this.xPos + this.width){
-    	   if(points < 20){
-    	      points++;
+        if(player1X < this.xPos && player1X + window.innerWidth / 10 > this.xPos + this.width
+            || player2X < this.xPos && player2X + window.innerWidth / 10 > this.xPos + this.width){
+    	   if(points === 21){
+                window.location.href="WinPage.html";
     	      
-    	   } else if (points =18){
-    	       window.location.href="WinPage.html";
+    	   } else {
+    	       points++;
     	    }
     	} else {
     	    if(points > 0){
@@ -120,27 +119,35 @@ DrawCircle.prototype = {
     }
    
     document.getElementById('scoreP').innerHTML = points;
-
-	}
-	
-
-	
-	
+    }	
 }
 
 function garbageCan(){
     this.update = function(){
+        // Player 1 controls
         if(keyIsDown(LEFT_ARROW)){
-            if(garbageX > oneFourthWidth){
-                garbageX -= window.innerWidth / 200;
+            if(player1X > oneFourthWidth){
+                player1X -= window.innerWidth / 200;
             }
         } else if (keyIsDown(RIGHT_ARROW)){
-            if(garbageX < window.innerWidth - oneFourthWidth - window.innerWidth / 10){
-                garbageX += window.innerWidth / 200;
+            if(player1X < window.innerWidth - oneFourthWidth - window.innerWidth / 10){
+                player1X += window.innerWidth / 200;
+            }
+        }
+
+        // Player 2 controls
+        if(keyIsDown(65)){
+            if(player2X > oneFourthWidth){
+                player2X -= window.innerWidth / 200;
+            }
+        } else if (keyIsDown(68)){
+            if(player2X < window.innerWidth - oneFourthWidth - window.innerWidth / 10){
+                player2X += window.innerWidth / 200;
             }
         }
     }
-    image(garbageCanImg, garbageX, garbageY, window.innerWidth / 10, window.innerWidth / 10);
+    image(garbageCanImg, player1X, player1Y, window.innerWidth / 10, window.innerWidth / 10);
+    image(garbageCanImg, player2X, player2Y, window.innerWidth / 10, window.innerWidth / 10);
     this.update();
     
 }
