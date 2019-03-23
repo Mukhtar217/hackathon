@@ -123,4 +123,26 @@ canvas{
 #test{
     color:black;
     position: absolute;
+    top:50px;
+    left:10px;
+    font-size:16px;
+}
+#healthBar{
+    position:absolute;
+    top:80%;
+    left:10px;
+    color:black;
+}
+#scoreP{
+    position:absolute;
+    left:80%;
+    top:10px;
+    font-size:16px;
+    color:black;
+    
+}
+#binStack{
+    position:absolute;
+    top:60%;
+    left:76%;
 }

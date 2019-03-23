@@ -7,7 +7,7 @@ var garbageX = oneFourthWidth;
 var garbageY = window.innerHeight - window.innerWidth / 10;
 
 let garbageCanImg;
-var garbageList;
+var garbageList = [];
 var points = 0;
 
 function preload(){
@@ -31,9 +31,9 @@ function setup(){
   for (var i = 0; i < 1; i++) {
     var x = Math.random() * window.innerWidth / 2 + oneFourthWidth;
     var y = random(height/3);
-    var d = random(20, 150);
+    var d = Math.random() * window.innerWidth / 10 / 2 + window.innerWidth / 10 / 2;
     var c = color(random(255), random(255), 255);
-    var s = random(0.2, 3);
+    var s = 2;
   	circles[i] = new DrawCircle(x, y, d, c, s);
   }
     
@@ -82,13 +82,25 @@ DrawCircle.prototype = {
 		this.yPos += this.speed;
     // the circle is outside the canvas, retset its position at the top
     if (this.yPos - this.diameter/2 > height) {
+    	console.log(this.xPos, garbageX);
+    	if(this.xPos - this.diameter / 2 > garbageX && this.xPos + this.diameter / 2 < garbageX + window.innerWidth /10){
+    	   // alert('Point!');
+    	    points++;
+    	    
+    	} else {
+    	    points--;
+    	}
     	this.yPos = -this.diameter/2;
     	this.xPos = Math.random() * window.innerWidth / 2 + oneFourthWidth;
-    	if(this.xPos === garbageX){
-    	    points++;
-    	}
     }
 	}
+	
+	// if (score>=100){
+	 //   window.location.href="winPage.html";
+
+    //} 
+	
+	
 }
 
 function garbageCan(){
@@ -136,7 +148,12 @@ function statsBox(){
     textSize(46)
     textSize(20)
     textSize(32);
-
+    
+    
+    health
+    fill('green')
+    rect(0, window.innerHeight-10, 50, 100)
+    
 };
 
 // function countdown() {
